@@ -153,12 +153,24 @@
 <div id="result" class="result">
 </div>
 <div id="tools" class="tools">
-     <button
-        v-for="value in btns"
-        @click="onClick(value)"
-        class="pure-button"
-        :class="{ 'button-error': selected == value}"
-       >{{value}}</button>
+    <!-- <button
+    v-for="value in btns"
+    @click="onClick(value)"
+    class="pure-button"
+    :class="{ 'button-error': selected == value}"
+    >{{value}}</button>
+     -->
+    <select v-model="selectedPrize">
+        <option value="first">一等奖</option>
+        <option value="second">二等奖</option>
+        <option value="third">三等奖</option>
+        <!-- 添加更多奖项 -->
+    </select>
+    <div>
+        <label for="num-selector">一次选取</label>
+        <input type="number" id="num-selector" v-model="selectedCount" min="1" max="50">
+        <span>人</span>
+    </div>
     <button
        class="pure-button"
        @click="toggle"
@@ -229,6 +241,8 @@
                 btns: [
                     30, 10, 5, 2, 1
                 ],
+                selectedCount: 5,  // 默认选中 4 人
+                selectedPrize: 'first',  // 默认为一等奖
                 lotteryTimer: null,  // 添加一个用于抽奖的定时器
                 currentWinner: null  // 当前显示的获奖者
             },
@@ -258,6 +272,7 @@
                         clearInterval(this.lotteryTimer);  // 停止抽奖时清除定时器
                         // this.showWinners(this.currentWinner);  // 显示当前选中的获奖者
                         this.running = false;  // 更新运行状态
+                        //todo 处理获奖结果...
                     } else {
                         this.startLottery();  // 开始抽奖
                         this.running = true;  // 更新运行状态
@@ -265,7 +280,7 @@
                 },
                 startLottery: function() {
                     this.lotteryTimer = setInterval(() => {
-                        var winners = this.getRandomWinners(this.selected);
+                        var winners = this.getRandomWinners(this.selectedCount);
                         this.showWinners(winners);
                     }, 50);  // 每隔50毫秒随机刷新获奖者信息
                 },
