@@ -25,8 +25,8 @@
         .result span {
             display: inline-block;
             font-size: 20px;  /* 调整字体大小 */
-            width: 200px;     /* 固定宽度 */
-            height: 60px;     /* 固定高度 */
+            width: 250px;     /* 固定宽度 */
+            height: 80px;     /* 固定高度 */
             background: #fff;
             line-height: 30px;    /* 调整行高以垂直居中文本 */
             color: #000;
@@ -178,7 +178,7 @@
             return [0.1 * Math.random() + 0.01, -(0.1 * Math.random() + 0.01)];
         };
         var getKey = function(item){
-            return item.name + '-' + item.phone;
+            return item.name + '-' + item.email;
         };
         var createHTML = function(){
             var html = [ '<ul>' ];
@@ -211,7 +211,7 @@
                 .map(function(m){
                   choosed[getKey(m)] = 1;
                   list[m.index].style.color = color;
-                  return m.name + '<br/>' + m.phone; 
+                  return m.name + '<br/>' + m.email; 
                 });
             localStorage.setItem('choosed', JSON.stringify(choosed));
             return ret;
@@ -282,7 +282,7 @@
                     for (var i = 0; i < this.selected; i++) {
                         var randomIndex = Math.floor(Math.random() * winners.length);
                         var winner = winners[randomIndex];
-                        winnersHtml += `<span>${winner.name}<br/>${winner.phone}</span>`;
+                        winnersHtml += `<span>${winner.name}<br/>${winner.email}</span>`;
                     }
                     $('#result').css('display', 'block').html(winnersHtml);
                 }
