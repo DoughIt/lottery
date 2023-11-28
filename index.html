@@ -160,13 +160,13 @@
     :class="{ 'button-error': selected == value}"
     >{{value}}</button>
      -->
-    <select v-model="selectedPrize">
+    <select class="pure-button" v-model="selectedPrize">
         <option value="first">一等奖</option>
         <option value="second">二等奖</option>
         <option value="third">三等奖</option>
         <!-- 添加更多奖项 -->
     </select>
-    <div>
+    <div class="pure-button">
         <label for="num-selector">一次选取</label>
         <input type="number" id="num-selector" v-model="selectedCount" min="1" max="50">
         <span>人</span>
@@ -294,7 +294,7 @@
                 showWinners: function(winners) {
                     // 每次都随机刷新结果面板上的获奖者信息
                     var winnersHtml = '';
-                    for (var i = 0; i < this.selected; i++) {
+                    for (var i = 0; i < this.selectedCount; i++) {
                         var randomIndex = Math.floor(Math.random() * winners.length);
                         var winner = winners[randomIndex];
                         winnersHtml += `<span>${winner.name}<br/>${winner.email}</span>`;
