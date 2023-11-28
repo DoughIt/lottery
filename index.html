@@ -256,7 +256,7 @@
                 toggle: function(){
                     if(this.running){
                         clearInterval(this.lotteryTimer);  // 停止抽奖时清除定时器
-                        this.showWinner(this.currentWinner);  // 显示当前选中的获奖者
+                        this.showWinners(this.currentWinner);  // 显示当前选中的获奖者
                         this.running = false;  // 更新运行状态
                     } else {
                         this.startLottery();  // 开始抽奖
