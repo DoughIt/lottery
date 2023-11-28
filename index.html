@@ -97,6 +97,11 @@
             background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
         }
 
+        .pure-text {
+            color: white;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
         .button-success, .button-error, .button-warning, .button-secondary {
             color: white;
             border-radius: 4px;
@@ -127,6 +132,14 @@
             text-align: center;
             width:100px;
         }
+
+        .pure-block {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 0;
+            text-align: center;
+        }
+
         .mask {
             -webkit-filter:blur(5px);
             filter:blur(5px);
@@ -160,16 +173,16 @@
     :class="{ 'button-error': selected == value}"
     >{{value}}</button>
      -->
-    <select class="pure-button" v-model="selectedPrize">
+    <select class="pure-button"  v-model="selectedPrize">
         <option value="first">一等奖</option>
         <option value="second">二等奖</option>
         <option value="third">三等奖</option>
         <!-- 添加更多奖项 -->
     </select>
-    <div>
-        <label for="num-selector">一次选取</label>
+    <div class="pure-block">
+        <label class="pure-text" for="num-selector">一次选取</label>
         <input class="pure-button" type="number" id="num-selector" v-model="selectedCount" min="1" max="50">
-        <span>人</span>
+        <span class="pure-text">人</span>
     </div>
     <button
        class="pure-button"
