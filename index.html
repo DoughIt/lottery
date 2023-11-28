@@ -260,7 +260,7 @@
                     this.lotteryTimer = setInterval(() => {
                         var winners = this.getRandomWinners(this.selected);
                         this.showWinners(winners);
-                    }, 50);  // 每隔50毫秒随机选择指定数量的获奖者
+                    }, 50);  // 每隔50毫秒随机刷新获奖者信息
                 },
 
                 getRandomWinners: function(count) {
@@ -270,8 +270,13 @@
                 },
 
                 showWinners: function(winners) {
-                    // 在结果面板上显示获奖者的信息
-                    var winnersHtml = winners.map(winner => `<span>${winner.name}<br/>${winner.phone}</span>`).join('');
+                    // 每次都随机刷新结果面板上的获奖者信息
+                    var winnersHtml = '';
+                    for (var i = 0; i < this.selected; i++) {
+                        var randomIndex = Math.floor(Math.random() * winners.length);
+                        var winner = winners[randomIndex];
+                        winnersHtml += `<span>${winner.name}<br/>${winner.phone}</span>`;
+                    }
                     $('#result').css('display', 'block').html(winnersHtml);
                 }
             }
