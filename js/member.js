@@ -1,4 +1,4 @@
-var members = [
+var member = [
   { "name": "张伟", "email": "zhang.wei@example.com", "skill": "Frontend Developer" },
   { "name": "李娜", "email": "li.na@example.com", "skill": "Backend Developer" },
   { "name": "王磊", "email": "wang.lei@example.com", "skill": "Full Stack Developer" },
