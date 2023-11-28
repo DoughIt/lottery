@@ -24,16 +24,22 @@
         }
         .result span {
             display: inline-block;
-            font-size: 25px;
-            width: 150px;
+            font-size: 20px;  /* 调整字体大小 */
+            width: 200px;     /* 固定宽度 */
+            height: 60px;     /* 固定高度 */
             background: #fff;
-            line-height: 30px;
+            line-height: 30px;    /* 调整行高以垂直居中文本 */
             color: #000;
             margin: 5px;
             border-radius: 10px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
-            padding: 10px 0;
+            padding: 15px 0;  /* 上下内边距，有助于垂直居中 */
+            overflow: hidden; /* 隐藏溢出文本 */
+            white-space: nowrap;  /* 防止文本换行 */
+            text-overflow: ellipsis;  /* 显示省略号 */
+            text-align: center;  /* 文本水平居中 */
         }
+
         button, input, optgroup, select, textarea {
             color: inherit;
             font: inherit;
@@ -157,7 +163,7 @@
        class="pure-button"
        @click="toggle"
        :class="{'button-secondary': !running,
-               'button-success': running}">{{running?'停!':'开始'}}</button>
+               'button-success': running}">{{running?'开奖!':'开始抽奖'}}</button>
     <button class="pure-button button-warning" @click="reset">重置</button>
 </div>
 <script type="text/javascript" src="js/zepto.js"></script>
@@ -251,10 +257,11 @@
                     if(this.running){
                         clearInterval(this.lotteryTimer);  // 停止抽奖时清除定时器
                         this.showWinner(this.currentWinner);  // 显示当前选中的获奖者
+                        this.running = false;  // 更新运行状态
                     } else {
                         this.startLottery();  // 开始抽奖
+                        this.running = true;  // 更新运行状态
                     }
-                    this.running = !this.running;
                 },
                 startLottery: function() {
                     this.lotteryTimer = setInterval(() => {
