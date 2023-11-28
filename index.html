@@ -258,20 +258,21 @@
                 },
                 startLottery: function() {
                     this.lotteryTimer = setInterval(() => {
-                        this.currentWinner = this.getRandomWinner();
-                        this.showWinner(this.currentWinner);
-                    }, 500);  // 每隔500毫秒随机选择一个获奖者
+                        var winners = this.getRandomWinners(this.selected);
+                        this.showWinners(winners);
+                    }, 50);  // 每隔50毫秒随机选择指定数量的获奖者
                 },
 
-                getRandomWinner: function() {
-                    // 随机从成员列表中选择一个获奖者
-                    var winnerIndex = Math.floor(Math.random() * member.length);
-                    return member[winnerIndex];
+                getRandomWinners: function(count) {
+                    // 随机从成员列表中选择指定数量的获奖者
+                    var shuffled = member.sort(() => 0.5 - Math.random());
+                    return shuffled.slice(0, count);
                 },
 
-                showWinner: function(winner) {
+                showWinners: function(winners) {
                     // 在结果面板上显示获奖者的信息
-                    $('#result').css('display', 'block').html('<span>' + winner.name + '<br/>' + winner.phone + '</span>');
+                    var winnersHtml = winners.map(winner => `<span>${winner.name}<br/>${winner.phone}</span>`).join('');
+                    $('#result').css('display', 'block').html(winnersHtml);
                 }
             }
         });
